@@ -1,0 +1,17 @@
+{
+    "preethi": {
+        "password": "chirupriyapreethi@123",
+        "failed_attempts": 1,
+        "locked": false
+    },
+    "priya": {
+        "password": "59be7e89929a43a3d827cc3e31ca50716b8662ab251fc8a934ef716eb0a930f5",
+        "failed_attempts": 0,
+        "locked": false
+    },
+    "Preethi": {
+        "password": "b6de3b2cbc6a4fe7dfa51f3d1f3dc63c0d826823b654ecb4c74dac3270a374a0",
+        "failed_attempts": 0,
+        "locked": false
+    }
+}
