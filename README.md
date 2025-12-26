@@ -35,7 +35,7 @@ When the script runs, the following options are shown:
 
 python auth.py
 
-Output
+## Output
 
 Messages are displayed in the console for:
 
