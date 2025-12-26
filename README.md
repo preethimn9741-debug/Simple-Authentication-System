@@ -1,4 +1,4 @@
-# simple-authentication-syste
+# simple-authentication-system
 
 ## Project Description
 This project is a **simple user authentication system** implemented in Python.
