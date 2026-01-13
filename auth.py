@@ -5,8 +5,6 @@ import os
 FILE_NAME = "users.json"
 
 
-# ----------------- Helper functions -----------------
-
 def load_users():
     if not os.path.exists(FILE_NAME):
         return {}
@@ -23,14 +21,11 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 
-# ----------------- Core functions -----------------
-
 def register_user(username, password):
     users = load_users()
 
     if username in users:
-        print("User already exists")
-        return
+        return "User already exists"
 
     users[username] = {
         "password": hash_password(password),
@@ -39,57 +34,31 @@ def register_user(username, password):
     }
 
     save_users(users)
-    print("User registered successfully")
+    return "User registered successfully"
 
 
 def login_user(username, password):
     users = load_users()
 
     if username not in users:
-        print("User not found")
-        return
+        return "User not found"
 
     user = users[username]
 
     if user["locked"]:
-        print("Account is locked")
-        return
+        return "Account is locked"
 
     if user["password"] == hash_password(password):
-        print("Login successful")
         user["failed_attempts"] = 0
-    else:
-        user["failed_attempts"] += 1
-        print("Wrong password")
+        save_users(users)
+        return "Login successful"
 
-        if user["failed_attempts"] >= 3:
-            user["locked"] = True
-            print("Account locked after 3 failed attempts")
+    user["failed_attempts"] += 1
+    if user["failed_attempts"] >= 3:
+        user["locked"] = True
+        save_users(users)
+        return "Account locked after 3 failed attempts"
 
     save_users(users)
+    return "Wrong password"
 
-
-# ----------------- Menu -----------------
-
-while True:
-    print("\n1. Register")
-    print("2. Login")
-    print("3. Exit")
-
-    choice = input("Choose option: ")
-
-    if choice == "1":
-        u = input("Username: ")
-        p = input("Password: ")
-        register_user(u, p)
-
-    elif choice == "2":
-        u = input("Username: ")
-        p = input("Password: ")
-        login_user(u, p)
-
-    elif choice == "3":
-        break
-
-    else:
-        print("Invalid choice")
